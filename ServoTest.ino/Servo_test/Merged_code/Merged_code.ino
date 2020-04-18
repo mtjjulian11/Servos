@@ -279,7 +279,7 @@ void Etapa3() {
   }
 }
 
-// transición a etapa 2
+// transición a etapa 2git statu
 
 void Etapa2() {
   for (pos2 = 10; pos2 <= 180; pos2++) {
