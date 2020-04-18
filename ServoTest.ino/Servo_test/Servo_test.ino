@@ -25,7 +25,18 @@ void setup() {
 
 }
 
+void reSet () { 
+   delay(1000);
+
+   myservo1.write(90);
+   myservo2.write(90);
+
+   delay(1000);
+}
+
+
 //transición a etapa 1
+
 void Etapa1(){
       for(pos=10; pos<=180;pos++){
         myservo1.write(pos);
@@ -66,9 +77,13 @@ void Etapa4(){
 }
 void loop() {
   Etapa4();
+  reSet();
   Etapa1();
+  reSet();
   Etapa3();
+  reSet();
   Etapa2();
+  reSet();
   
  
 }
