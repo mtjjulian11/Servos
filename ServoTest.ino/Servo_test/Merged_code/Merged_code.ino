@@ -48,8 +48,12 @@ char var;
 
 Servo myservo1;
 Servo myservo2;
+
 int pos = 90;
 int pos2 = 90;
+
+int Time = 10;
+int Time1 = 50;
 
 
 
@@ -210,33 +214,33 @@ void loop() {
 
   switch (var) {
 
-    case 1:
-      reSet();
-      Etapa1();
-      Etapa2();
-      break;
+        case 1:
+          ClockWise();
+          Serial.println("case 1");
+          break;
+    
+        case 2:
+          AntiClockWise();
+          Serial.println("case 2");
+          break;
+    
+        case 3:
+          CompleteTurn();
+          Serial.println("case 3");
+          break;
+    
+        case 4:
+          Diagonal_1();
+          Trans2_3 ();
+          Serial.println("case 4");
+          break;
 
-    case 2:
-      Etapa4();
-      Etapa2();
-      break;
-
-    case 3:
-      Etapa3();
-      Etapa1();
-      break;
-
-    case 4:
-      Etapa1();
-      Etapa2();
-      Etapa3();
-      Etapa4();
-      break;
-
-    case 5:
-      Etapa5();
-      break;
-
+        case 5:
+          Diagonal_2();
+          Trans1_4 ();
+          reSet
+          Serial.println("case 5");
+          break;
 
     }
 
@@ -255,61 +259,300 @@ void reSet () {
   delay(1000);
 }
 
+// ____________________________________________ ClorckWise ________________________________________
+void ClockWise() {
 
-//transición a etapa 1
+  // Trant to 1
+  //  for(pos=90;pos<=180;pos++){
+  myservo1.write(180);
+  myservo2.write(180);
+  Serial.println(pos);
+  delay(Time);
+  //  }
 
-void Etapa1() {
-  for (pos = 10; pos <= 180; pos++) {
+  // TRANS to 1-2
+  for (pos = 180; pos >= 10; pos--) {
+    pos2 = 180;
     myservo1.write(pos);
-    myservo2.write(180 - pos);
-    Serial.println ("Estapa 1");
-    delay(50);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  // TRANS to 2- 3
+
+  for (pos2 = 180; pos2 >= 10; pos2--) {
+    pos = 10;
+    myservo2.write(pos2);
+    myservo1.write(pos);
+
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  // TRANS to 3-4
+
+  for (pos = 10; pos <= 180; pos++) {
+    pos2 = 10;
+    myservo1.write(pos);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+
+
+  // Trans to 4-1
+
+  for (pos2 = 10; pos2 <= 180; pos2++) {
+    myservo1.write(180);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
 
   }
 }
-// transición a etapa 3
 
-void Etapa3() {
+// ________________________________________ AntiClockWise ________________________________________
+
+void AntiClockWise () {
+
+  //  Trans to 4-3
+  pos = 180;
   for (pos = 180; pos >= 10; pos--) {
     myservo1.write(pos);
-    myservo2.write(170 + pos);
-    Serial.println ("Estapa 3");
-    delay(50);
+    myservo2.write(10);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
 
   }
-}
 
-// transición a etapa 2git statu
+  //  Trans to 3-2
 
-void Etapa2() {
   for (pos2 = 10; pos2 <= 180; pos2++) {
     myservo1.write(10);
     myservo2.write(pos2);
-    Serial.println ("Estapa 2");
-    delay(50);
-
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
   }
-}
 
-//transición etapa 4
 
-void Etapa4() {
+  //  Trans to 2-1
+
   for (pos = 10; pos <= 180; pos++) {
     myservo1.write(pos);
-    myservo2.write(pos);
-    Serial.println ("Estapa 4");
-    delay(50);
+    myservo2.write(180);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  //  Trans to 1-4
+
+  for (pos2 = 180; pos2 >= 10; pos2--) {
+    myservo1.write(180);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
   }
 
 }
 
-//transición etapa 5
 
-void Etapa5() {
-  for (pos2 = 10; pos2 <= 70; pos2++) {
-    myservo1.write(80 - pos2);
-    myservo2.write(pos2);
-    Serial.println ("Estapa 5");
-    delay(10);
+// ______________________________________ CompleteTurn ____________________________________________
+
+
+void CompleteTurn () {
+
+  //Trant to 1
+  for (pos = 90; pos <= 180; pos++) {
+    myservo1.write(180);
+    myservo2.write(180);
+    Serial.println(pos);
+    delay(Time);
   }
+
+  // TRANS to 1-2
+  for (pos = 180; pos >= 10; pos--) {
+    pos2 = 180;
+    myservo1.write(pos);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  // TRANS to 2- 3
+
+  for (pos2 = 180; pos2 >= 10; pos2--) {
+    pos = 10;
+    myservo2.write(pos2);
+    myservo1.write(pos);
+
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  // TRANS to 3-4
+
+  for (pos = 10; pos <= 180; pos++) {
+    pos2 = 10;
+    myservo1.write(pos);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+
+  //  Trans to 4-3
+
+  for (pos = 180; pos >= 10; pos--) {
+    myservo1.write(pos);
+    myservo2.write(10);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+
+  //  Trans to 3-2
+
+  for (pos2 = 10; pos2 <= 180; pos2++) {
+    myservo1.write(10);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+
+  //  Trans to 2-1
+
+  for (pos = 10; pos <= 180; pos++) {
+    myservo1.write(pos);
+    myservo2.write(180);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  //  Trans to 1-4
+
+  for (pos2 = 180; pos2 >= 10; pos2--) {
+    myservo1.write(180);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+  }
+
+  // Trans to 4-1
+
+  for (pos2 = 10; pos2 <= 180; pos2++) {
+    myservo1.write(180);
+    myservo2.write(pos2);
+    Serial.println(pos);
+    Serial.println(pos2);
+    delay(Time);
+
+  }
+
+}
+
+
+// ______________________________________ Diagonals _______________________________________________
+
+
+void Diagonal_1() {
+
+  for (pos = 10; pos <= 90; pos++) {
+    myservo1.write(pos);
+    myservo2.write(100 - pos);
+    Serial.println(pos);
+    Serial.println("tatus 1");
+    delay(Time1);
+
+  }
+
+  for (pos = 90; pos >= 10; pos--) {
+    myservo1.write(pos);
+    myservo2.write(10 + (90 - pos));
+    Serial.println(pos);
+    Serial.println("tatus 2");
+    delay(Time1);
+
+  }
+}
+
+void Diagonal_2(){
+  
+  for (pos = 10; pos <= 90; pos++) {
+    myservo1.write(pos);
+    myservo2.write(pos);
+    Serial.println(pos);
+    Serial.println("tatus 1");
+    delay(Time1);
+
+  }
+
+  for (pos = 90; pos >= 10; pos--) {
+    myservo1.write(pos);
+    myservo2.write(pos);
+    Serial.println(pos);
+    Serial.println("tatus 2");
+    delay(Time1);
+
+  }
+  
+}
+
+// ____________________________________ Transitions _____________________________________________
+
+void Trans1_4 () {
+
+  for (pos = 180; pos >= 10; pos--) {
+    myservo1.write(pos);
+    myservo2.write(180);
+    Serial.println(pos);
+    Serial.println("tatus 1");
+    delay(Time1);
+ }
+
+  for (pos = 10; pos <= 180; pos++) {
+    myservo1.write(pos);
+    myservo2.write(180);
+    Serial.println(pos);
+    Serial.println("tatus 2");
+    delay(Time1);
+ }
+
+}
+
+void Trans2_3 () {
+
+  for (pos = 180; pos >= 10; pos--) {
+    myservo1.write(pos);
+    myservo2.write(10);
+    Serial.println(pos);
+    Serial.println("tatus 3");
+    delay(Time1);
+ }
+
+  for (pos = 10; pos <= 180; pos++) {
+    myservo1.write(pos);
+    myservo2.write(10);
+    Serial.println(pos);
+    Serial.println("tatus 4");
+    delay(Time1);
+ }
+
 }
